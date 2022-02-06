@@ -42,6 +42,10 @@ type Field struct {
 	Value string
 }
 
+func SetLoggableFields(custom []fmt.Stringer) {
+	loggable = custom
+}
+
 func SetLevel(l uint8) {
 	level = l
 }
