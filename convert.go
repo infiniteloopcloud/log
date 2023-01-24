@@ -26,3 +26,7 @@ func LevelToUint() uint8 {
 		return DebugLevel
 	}
 }
+
+func SetLevelEnvironmentVariable(l string) {
+	LevelEnvironmentVariable = l
+}

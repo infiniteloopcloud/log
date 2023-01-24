@@ -101,6 +101,9 @@ func parse(ctx context.Context, scopeLevel string, msg string, err error, fields
 	for _, loggableField := range loggable {
 		var val string
 		var ctxVal = ctx.Value(loggableField)
+		if ctxVal == nil {
+			continue
+		}
 		switch v := ctxVal.(type) {
 		case fmt.Stringer:
 			val = v.String()
