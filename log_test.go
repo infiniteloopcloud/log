@@ -11,7 +11,6 @@ import (
 
 var (
 	TestField ContextField = "test_field1"
-	UserID    ContextField = "user_id"
 )
 
 func TestMain(m *testing.M) {
