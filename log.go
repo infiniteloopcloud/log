@@ -30,10 +30,14 @@ const (
 )
 
 const (
-	TracingTime ContextField = "tracing_time"
+	TracingTime   ContextField = "tracing_time"
+	UserID        ContextField = "user_id"
+	ClientHost    ContextField = "client_host"
+	CorrelationID ContextField = "correlation_id"
+	HTTPPath      ContextField = "http_path"
 )
 
-var loggable = []fmt.Stringer{}
+var loggable = []fmt.Stringer{UserID, ClientHost, CorrelationID, HTTPPath}
 
 var level = DebugLevel
 
@@ -44,6 +48,14 @@ type Field struct {
 
 func SetLoggableFields(custom []fmt.Stringer) {
 	loggable = custom
+}
+
+func GetLoggableFields() []fmt.Stringer {
+	return loggable
+}
+
+func AppendLoggableFields(l fmt.Stringer) {
+	loggable = append(loggable, l)
 }
 
 func SetLevel(l uint8) {
