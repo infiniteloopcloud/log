@@ -63,35 +63,35 @@ func SetLevel(l uint8) {
 }
 
 func Debug(ctx context.Context, msg string) {
-	p.send(parse(ctx, debugStr, msg, nil), DebugLevel)
+	p.send(Parse(ctx, debugStr, msg, nil), DebugLevel)
 }
 
 func Debugf(ctx context.Context, format string, args ...interface{}) {
-	p.send(parse(ctx, debugStr, fmt.Sprintf(format, args...), nil), DebugLevel)
+	p.send(Parse(ctx, debugStr, fmt.Sprintf(format, args...), nil), DebugLevel)
 }
 
 func Info(ctx context.Context, msg string) {
-	p.send(parse(ctx, infoStr, msg, nil), InfoLevel)
+	p.send(Parse(ctx, infoStr, msg, nil), InfoLevel)
 }
 
 func Infof(ctx context.Context, format string, args ...interface{}) {
-	p.send(parse(ctx, infoStr, fmt.Sprintf(format, args...), nil), InfoLevel)
+	p.send(Parse(ctx, infoStr, fmt.Sprintf(format, args...), nil), InfoLevel)
 }
 
 func Warn(ctx context.Context, msg string) {
-	p.send(parse(ctx, warnStr, msg, nil), WarnLevel)
+	p.send(Parse(ctx, warnStr, msg, nil), WarnLevel)
 }
 
 func Warnf(ctx context.Context, format string, args ...interface{}) {
-	p.send(parse(ctx, warnStr, fmt.Sprintf(format, args...), nil), WarnLevel)
+	p.send(Parse(ctx, warnStr, fmt.Sprintf(format, args...), nil), WarnLevel)
 }
 
 func Error(ctx context.Context, err error, msg string) {
-	p.send(parse(ctx, errorStr, msg, err), ErrorLevel)
+	p.send(Parse(ctx, errorStr, msg, err), ErrorLevel)
 }
 
 func Errorf(ctx context.Context, err error, format string, args ...interface{}) {
-	p.send(parse(ctx, errorStr, fmt.Sprintf(format, args...), err), ErrorLevel)
+	p.send(Parse(ctx, errorStr, fmt.Sprintf(format, args...), err), ErrorLevel)
 }
 
 func Trace(ctx context.Context, msg string) {
@@ -105,10 +105,10 @@ func Trace(ctx context.Context, msg string) {
 	if v, ok := ctxVal.(time.Time); ok {
 		f = append(f, Field{Key: "spent", Value: time.Since(v).String()})
 	}
-	p.send(parse(ctx, traceStr, msg, nil, f...), TraceLevel)
+	p.send(Parse(ctx, traceStr, msg, nil, f...), TraceLevel)
 }
 
-func parse(ctx context.Context, scopeLevel string, msg string, err error, fields ...Field) string {
+func Parse(ctx context.Context, scopeLevel string, msg string, err error, fields ...Field) string {
 	var parsable = make(map[string]interface{})
 	for _, loggableField := range loggable {
 		var val string

@@ -21,7 +21,7 @@ func TestMain(m *testing.M) {
 func TestParse(t *testing.T) {
 	ctx := context.WithValue(context.Background(), TestField, "test")
 	ctx = context.WithValue(ctx, UserID, "test_user")
-	result := parse(ctx, "info", "test_message", nil)
+	result := Parse(ctx, "info", "test_message", nil)
 	t.Log(result)
 }
 
@@ -46,7 +46,7 @@ func BenchmarkParse(b *testing.B) {
 		p = blank{}
 		ctx := context.WithValue(context.Background(), TestField, "test")
 		ctx = context.WithValue(ctx, UserID, "test_user")
-		parse(ctx, "info", "test_message", nil)
+		Parse(ctx, "info", "test_message", nil)
 	}
 }
 
